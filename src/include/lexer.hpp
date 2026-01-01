@@ -38,8 +38,23 @@ private:
         }
         return Token(TokenType::INTEGER, num, line);
     }
-public:
 
+    Token parseIdentifier() {
+        std::string ident{};
+        while(isalnum(currentChar()) || currentChar() == '_') {
+            ident += currentChar();
+            gotoNextChar();
+        }
+
+        //check if identifier word is a reserved word
+        if( ident == "print" ||
+            ident == "int" || ident == "input") {
+            return Token(TokenType::RESERVED, ident, line);
+        }
+        return Token(TokenType::IDENTIFIER, ident, line);
+    }
+    
+public:
 };
 
 #endif //LEXER_HPP

@@ -55,6 +55,42 @@ private:
     }
     
 public:
+
+    Lexer(const std::string & src): source(src), position(0), line(1) {
+        
+    }
+
+    Token getNextToken() {
+        skipWhitespace();
+
+        if(currentChar() == '\0') {
+            return Token(TokenType::END, "", line );
+        }
+
+        //parse numbers 
+        if(isdigit(currentChar())) {
+            return parseInteger();
+        }
+
+        //identifiers and reserved words
+        if(isalpha(currentChar())) {
+            return parseIdentifier();
+        }
+        const char ch = currentChar();
+        return Token(TokenType::UNKNOWN, std::string(1, ch), line);
+    }
+
+    std::vector<Token> tokenise() {
+        std::vector<Token> tokens;
+
+        Token token;
+
+        do {
+            token = getNextToken();
+            tokens.push_back(token);
+        } while(token.type != TokenType::END);
+        return tokens;
+    }
 };
 
 #endif //LEXER_HPP

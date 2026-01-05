@@ -22,4 +22,13 @@ class IntegerNode: public ASTNode {
     }
 };
 
+class VariableNode: public ASTNode{
+    public: std::string name;
+    VariableNode(const std::string& n): name(n) { }
+
+    void print(int indent = 0) const override {
+        std::cout << std::string(indent, ' ')  << "Variable: " << name << std::endl;
+    }
+};
+
 #endif //AST_HPP

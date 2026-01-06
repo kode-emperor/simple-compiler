@@ -1,5 +1,5 @@
-#ifndef TOKEN_HPP
-#define TOKEN_HPP
+#ifndef TOKENS_HPP
+#define TOKENS_HPP
 #include <string>
 
 constexpr int kProgramFirstLine = 1;
@@ -28,4 +28,4 @@ struct Token {
     }
 };
 
-#endif
+#endif //TOKENS_HPP
